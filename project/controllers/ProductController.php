@@ -44,14 +44,10 @@
 		}
         public function show($params)
 		{   
-            // Зададим тайтл:
-			$this->title = 'Действие show контроллера Product';
             return $this->render('product/show', $this->products[$params['n']]);
 		}
         public function all()
         {   
-            // Зададим тайтл:
-			$this->title = 'Действие all контроллера product';
             $p = $this->products;
             return $this->render('product/all', $p);
 		}
