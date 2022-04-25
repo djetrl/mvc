@@ -9,9 +9,10 @@
 			return $this->findOne("SELECT * FROM pages WHERE id=$id");
 		}
 		
-		public function getAll()
+		public function getByRange($from, $to)
 		{
-			return $this->findMany("SELECT id, name FROM pages");
+			return $this->findMany("SELECT * FROM pages 
+				WHERE id>=$from AND id<=$to"); 
 		}
 	}
 ?>
