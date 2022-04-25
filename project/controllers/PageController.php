@@ -1,32 +1,16 @@
 <?php
 	namespace Project\Controllers;
 	use \Core\Controller;
-	use \Project\Models\Page;
 	
-	class PageController extends Controller
+	class PageController extends 
+		Controller 
 	{
-		public function one($params)
+        public function act()
 		{
-			$page = (new Page) -> getById($params['id']);
-			
-			$this->title = $page['name'];
-			return $this->render('page/one', [
-				'text' => $page['text'],
-				'price' => $page['price'],
-				'number' => $page['number'],
-				'h1' => $this->title
+			return $this->render('page/act', [
+				'header' => 'список юзеров',
+				'users'  => ['user1', 'user2', 'user3'],
 			]);
 		}
-		
-		public function all()
-		{
-			$this->title = 'Список всех страниц';
-			
-			$pages = (new Page) -> getAll();
-			return $this->render('page/all', [
-				'pages' => $pages,
-				'h1' => $this->title
-			]);
-		}
-	}
+    }
 ?>
