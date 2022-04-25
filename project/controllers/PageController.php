@@ -1,32 +1,34 @@
 <?php
 	namespace Project\Controllers;
 	use \Core\Controller;
-	use \Project\Models\Page;
 	
-	class PageController extends Controller
-	{
-		public function one($params)
+	class PageController extends 
+		Controller 
+	{	
+		private $pages;
+
+		public function __construct()
 		{
-			$page = (new Page) -> getById($params['id']);
-			
-			$this->title = $page['name'];
-			return $this->render('page/one', [
-				'text' => $page['text'],
-				'price' => $page['price'],
-				'number' => $page['number'],
-				'h1' => $this->title
+			$this->pages = [
+				1 => ['title'=>'страница 1', 'text'=>'текст страницы 1'],
+				2 => ['title'=>'страница 2', 'text'=>'текст страницы 2'],
+				3 => ['title'=>'страница 3', 'text'=>'текст страницы 3'],
+			];
+		}
+        public function act()
+		{
+			// Зададим тайтл:
+			$this->title = 'Действие act контроллера page';
+			return $this->render('page/act', [
+				'header' => 'список юзеров',
+				'users'  => ['user1', 'user2', 'user3'],
 			]);
 		}
-		
-		public function all()
+		public function show($params)
 		{
-			$this->title = 'Список всех страниц';
-			
-			$pages = (new Page) -> getAll();
-			return $this->render('page/all', [
-				'pages' => $pages,
-				'h1' => $this->title
-			]);
+			$t = $this->pages[$params['id']];
+			$this->title = $t['title'];
+			return $this->render('page/show', $this->pages[$params['id']]);
 		}
-	}
+    }
 ?>
